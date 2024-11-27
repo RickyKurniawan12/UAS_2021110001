@@ -9,7 +9,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Status</th>
+                <th>Deskripsi</th>
                 <th>Harga</th>
             </tr>
         </thead>
@@ -18,7 +18,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $menu->name }}</td>
-                <td>{{ $menu->Status }}</td>
+                <td>{{ $menu->description }}</td>
                 <td>Rp{{ number_format($menu->price, 2) }}</td>
                 <td>
                     <form action="{{ route('orders.destroy', $menu->id) }}" method="POST">

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Daftar Menu</h1>
-    <a href="{{ route('orders.create') }}" class="btn btn-primary">Tambah Menu</a>
+    <a href="{{ route('orders.create') }}" class="btn btn-primary">Tambah Order</a>
     <table class="table mt-3">
         <thead>
             <tr>
@@ -17,14 +17,14 @@
             @foreach($orders as $order)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $menu->name }}</td>
-                <td>{{ $menu->description }}</td>
-                <td>Rp{{ number_format($menu->price, 2) }}</td>
+                <td>{{ $order->name }}</td>
+                <td>{{ $order->description }}</td>
+                <td>Rp{{ number_format($order->price, 2) }}</td>
                 <td>
-                    <form action="{{ route('orders.destroy', $menu->id) }}" method="POST">
+                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus menu ini?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus order menu ini?')">Hapus</button>
                     </form>
                 </td>
             </tr>

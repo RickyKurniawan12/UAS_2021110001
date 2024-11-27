@@ -19,7 +19,7 @@
         </div>
     @endif
 
-        <form action={{route('menus.store')}} method="POST" enctype="multipart/form-data">
+        <form action={{route('orders.store')}} method="POST" enctype="multipart/form-data">
             @csrf
             
             <div class=" form-group">
@@ -36,7 +36,7 @@
             </div>
             <div class=" form-group">
                 <label for="retail_price">Price</label>
-                <input type="text" class="form-control" id="price"placeholder="price" name="price" value="{{old('retail_price')}}">
+                <input type="text" class="form-control" id="price"placeholder="price" name="price" value="{{old('price')}}">
             </div>
             <div class=" form-group">
                 <label for="product_image">product_image</label>

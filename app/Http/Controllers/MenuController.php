@@ -18,6 +18,11 @@ class MenuController extends Controller
         $menus = Menu::all();
         return view('menus.create', compact('menus'));
     }
+    // public function show(Menu $menus)
+    // {
+    //     return view('menus.show', compact('menus'));
+    // }
+
 
     public function store(Request $request)
     {

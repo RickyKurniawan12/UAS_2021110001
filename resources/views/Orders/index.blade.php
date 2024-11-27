@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Update Order')
+
 @section('content')
 <div class="container">
     <h1>Daftar Menu</h1>

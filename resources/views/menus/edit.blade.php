@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Update menu')
+
 @section('content')
 <h1>Edit Menu</h1>
 <form action="{{ route('menus.update', $menu) }}" method="POST">

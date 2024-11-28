@@ -31,7 +31,7 @@
                 <input type="text" class="form-control" id="name"placeholder="Product Name" name="name" required value="{{old('name')}}">
             </div>
             <div class=" form-group">
-                <label for="description">Description</label>
+                <label for="description">Status</label>
                 <input type="text" class="form-control" id="description" placeholder="description" name="description" required value="{{old('description')}}">
             </div>
             <div class=" form-group">

@@ -11,7 +11,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Deskripsi</th>
+                <th>status</th>
                 <th>Harga</th>
             </tr>
         </thead>

@@ -14,7 +14,7 @@
         <input type="text" class="form-control" id="description" name="description" required value="{{ old('description', $menu->description) }}">
     </div>
     <label>Price:</label>
-    <input type="number" step="0.01" name="price" value="{{ $menu->price }}">
+    <input type="number" step="500" name="price" value="{{ $menu->price }}">
     <button type="submit">Update Menu</button>
 </form>
 @endsection

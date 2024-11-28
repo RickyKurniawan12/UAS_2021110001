@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Update menu')
+@section('title', 'Memesan menu')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
     <table class="table mt-3">
         <thead>
             <tr>
-                <th>No</th>
+                <th>No</th>     
                 <th>Nama</th>
                 <th>Deskripsi</th>
                 <th>Harga</th>
@@ -29,6 +29,15 @@
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus menu ini?')">Hapus</button>
                     </form>
                 </td>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+                
             </tr>
             @endforeach
         </tbody>

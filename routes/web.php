@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::middleware(['auth'])->group(function () {
 Route::resource('orders', OrderController::class);
 });
+
 Route::resource('menus', MenuController::class);
 Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -26,19 +28,21 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+Route::post('register', [RegisterController::class, 'register']);                                                                       
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware(['auth'])->group(function () {
 Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
 Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
 
 // Masukkan route yang ingin diproteksi di sini
 Route::get('/form', [HomeController::class, 'form'])->name('form');
 });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('home');
     })->name('dashboard');
 });
 

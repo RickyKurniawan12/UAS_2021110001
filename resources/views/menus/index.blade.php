@@ -22,15 +22,29 @@
                 <td>{{ $menu->name }}</td>
                 <td>{{ $menu->description }}</td>
                 <td>Rp{{ number_format($menu->price, 2) }}</td>
-                <td>
+                <td>                  
                     <form action="{{ route('menus.destroy', $menu->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus menu ini?')">Hapus</button>
                     </form>
+                    <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-primary btn-sm">
+                        Edit
+                    </a>  
                 </td>
             </tr>
             @endforeach
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                @auth
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                        Logout
+                    </button>
+                </form>
+                @endauth
+            </div>
+            
         </tbody>
     </table>
 </div>

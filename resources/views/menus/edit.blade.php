@@ -9,8 +9,10 @@
     @method('PUT')
     <label>Name:</label>
     <input type="text" name="name" value="{{ $menu->name }}">
-    <label>Description:</label>
-    <textarea name="description">{{ $menu->description }}</textarea>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description" required value="{{ old('description', $menu->description) }}">
+    </div>
     <label>Price:</label>
     <input type="number" step="0.01" name="price" value="{{ $menu->price }}">
     <button type="submit">Update Menu</button>

@@ -33,6 +33,8 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::middleware(['auth'])->group(function () {
 Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
 Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
+Route::get('/menus/{Menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+
 
 // Masukkan route yang ingin diproteksi di sini
 Route::get('/form', [HomeController::class, 'form'])->name('form');

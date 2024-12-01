@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="'mt-4 p-5 bg-black text-white rounded">
-    <h1>Resgistrasi Order</h1>
+    <h1>Registrasi Order</h1>
 </div>
 <div class="row my-5">
     <div class="col-12 px-5">
@@ -38,6 +38,12 @@
                 <label for="retail_price">Price</label>
                 <input type="text" class="form-control" id="price"placeholder="price" name="price" value="{{old('price')}}">
             </div>
+            <div class=" form-group">
+                <label for="total_order">Total Order:</label>
+                <input type="number" name="total_order" id="total_order" laceholder="total_order" name="total_order"value="{{ old('total_order') }}">
+                @error('total_order')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             <div class=" form-group">
                 <label for="product_image">product_image</label>
                 <input type="file" class="form-control" id="product_image"name="product_image">

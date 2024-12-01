@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
-            $table->integer('quantity');
-            $table->decimal('total_price', 10, 2);
-            $table->string('customer_name');
-            $table->string('customer_phone');
+            $table->id(); // ID auto increment
+            $table->string('name'); // Nama produk
+            $table->string('status')->default('pending'); // Status order (default: pending)
+            $table->decimal('price', 10, 2); // Harga produk
+            $table->integer('total_order')->default(0); // Total jumlah order (default: 0)
+            $table->string('image')->nullable(); // Gambar produk (opsional)
             $table->timestamps();
         });
     }

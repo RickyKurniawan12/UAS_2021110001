@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
-@section('title','home | product')
+@section('title','home | menus')
 
-@section('body')
+@section('content')
 
 <div class="container">
     <h1>Welcome to XYZ Restaurant</h1>

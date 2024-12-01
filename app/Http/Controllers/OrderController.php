@@ -14,21 +14,34 @@ class OrderController extends Controller
     }
 
     public function create()
-    {
-        return view('orders.create');
+    { 
+        $totalOrders = Order::count(); // Hitung total orders
+        return view('orders.create', compact('totalOrders'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'product_name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:1',
-            'price' => 'required|numeric|min:0',
-            'customer_name' => 'required|string|max:255',
+        'id' => 'required|unique:orders,id', 
+        'name' => 'required|string|max:255',  
+        'description' => 'nullable',
+        'price' => 'required|numeric|min:0', 
+        'total_order' => 'required|numeric',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
+        $totalOrders = Order::count();
+        $imagePath = null;
+        if ($request->hasFile('product_image')) {
+            $imagePath = $request->file('product_image')->store('product_images', 'public');
 
-        Order::create($validated);
-        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        Order::create(['id' => $request->id,
+        'name' => $validated['name'],
+        'description'=> $validated['description'],
+        'price' => $validated['price'],
+        'image'=> $imagePath,
+        'total_orders' => $totalOrders + 1]);
+        
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');}
     }
 
     public function edit(Order $order)
@@ -39,10 +52,12 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'product_name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:1',
+            'id' => 'required|unique:orders,id',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable',
             'price' => 'required|numeric|min:0',
-            'customer_name' => 'required|string|max:255',
+            'total_order' => 'required|numeric',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $order->update($validated);

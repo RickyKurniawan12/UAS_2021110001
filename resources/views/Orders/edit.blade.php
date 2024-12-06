@@ -9,7 +9,7 @@
     @method('PUT')
     
     <div class="mb-3 col-md-12 col-sm-12">
-        <label for="id" class="form-label">Item ID</label>
+        <label for="id" class="form-label">ID</label>
         <input type="text" class="form-control" id="id" name="id" readonly value="{{ old('id', $order->id) }}">
     </div>
 

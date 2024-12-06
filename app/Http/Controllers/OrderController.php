@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class OrderController extends Controller
     public function create()
     { 
         $totalOrders = Order::count(); // Hitung total orders
-        return view('orders.create', compact('totalOrders'));
+        $menus = Menu::all();
+        return view('orders.create', compact('totalOrders', 'menus'));
     }
 
     public function store(Request $request)
@@ -24,22 +26,23 @@ class OrderController extends Controller
         $validated = $request->validate([
         'id' => 'required|unique:orders,id', 
         'name' => 'required|string|max:255',  
-        'description' => 'nullable',
+        'status' => 'nullable',
         'price' => 'required|numeric|min:0', 
         'total_order' => 'required|numeric',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
-        $totalOrders = Order::count();
+
+        // $totalOrders = Order::count();
         $imagePath = null;
         if ($request->hasFile('product_image')) {
             $imagePath = $request->file('product_image')->store('product_images', 'public');
 
         Order::create(['id' => $request->id,
         'name' => $validated['name'],
-        'description'=> $validated['description'],
+        'status'=> $validated['status'],
         'price' => $validated['price'],
         'image'=> $imagePath,
-        'total_orders' => $totalOrders + 1]);
+        'total_order' => $validated['total_order']]);
         
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');}
     }
@@ -50,19 +53,18 @@ class OrderController extends Controller
     }
 
     public function update(Request $request, Order $order)
-    {
-        $validated = $request->validate([
-            'id' => 'required|unique:orders,id',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable',
-            'price' => 'required|numeric|min:0',
-            'total_order' => 'required|numeric',
-            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'status' => 'required|string|in:Pending,Shipped,Completed,Canceled',
+        'price' => 'required|numeric',
+        'total_order' => 'required|integer|min:1',
+    ]);
 
-        $order->update($validated);
-        return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
-    }
+    $order->update($validated);
+
+    return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+}
 
     public function destroy(Order $order)
     {

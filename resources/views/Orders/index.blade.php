@@ -21,9 +21,9 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $order->name }}</td>
-                <td>{{ $order->description }}</td>
+                <td>{{ $order->status }}</td>
                 <td>Rp{{ number_format($order->price, 2) }}</td>
-                <td>{{ $order->items_count }}</td> <!-- items_count berasal dari withCount -->
+                <td>{{ $order->total_order }}</td> <!-- items_count berasal dari withCount -->
                 <td>
                     <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                         @csrf
